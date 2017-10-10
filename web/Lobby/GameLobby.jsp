@@ -11,6 +11,10 @@
     <title>The Battle Ships Game</title>
 </head>
 <body>
-    Lobby page
+<form action="upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="xmlFileName" />
+    <input type="file" name="file" />
+    <input type="submit" value="upload"/>
+</form>
 </body>
 </html>
