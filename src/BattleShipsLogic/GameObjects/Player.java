@@ -123,7 +123,7 @@ public class Player {
 
                 // If the item is a Battle Ship or a not destroyed mine we don't print the item.
                 if((board[i][j] instanceof BattleShip) || ((board[i][j] instanceof Mine) && !((Mine)board[i][j]).IsDestroyed())){
-                    tracking[i+1][j+1] = ' ';
+                    tracking[i+1][j+1] = 'W';
                 }
                 else {
                     tracking[i+1][j+1] = board[i][j].getItemChar();
@@ -139,7 +139,7 @@ public class Player {
         char[][] newBoard = new char[boardSize + 1][boardSize + 1];
         char currentNumber = '1', currentLetter = 'A';
 
-        newBoard[0][0] = ' ';
+        newBoard[0][0] = 'W';
 
         for (int i = 1; i < boardSize + 1; i++) {
             newBoard[0][i] = currentLetter;

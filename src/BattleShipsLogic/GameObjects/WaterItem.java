@@ -8,7 +8,7 @@ public class WaterItem extends SeaItem {
     /* -------------- Function members -------------- */
     public WaterItem(int x, int y) {
         super(x,y);
-        setItemChar(' ');
+        setItemChar('W');
     }
     @Override
     public void GotHit(){

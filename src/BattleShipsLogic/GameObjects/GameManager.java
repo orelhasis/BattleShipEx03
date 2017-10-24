@@ -27,8 +27,12 @@ public class GameManager extends java.util.Observable{
     private List<GameMove> gameHistory = new ArrayList<>();
     private BattleShipGame gameSettings;
     private final int NANO_SECONDS_IN_SECOND = 1000000000;
+    private int gameID;
+    private String gameName;
 
     /* -------------- Getters and setters -------------- */
+    public int getGameID(){return this.gameID;}
+    public String getGameName(){return this.gameName;}
 
     public Player getWinnerPlayer() {
         return winnerPlayer;
@@ -129,9 +133,15 @@ public class GameManager extends java.util.Observable{
     /* -------------- Function members -------------- */
 
     public GameManager() {
+        status = GameStatus.INIT;
+        errorString = "";
+    }
 
-            status = GameStatus.INIT;
-            errorString = "";
+    public GameManager(int id, String gameName) {
+        gameID = id;
+        this.gameName = gameName;
+        status = GameStatus.INIT;
+        errorString = "";
     }
 
     public boolean LoadGame(BattleShipGame gameSettings){
@@ -253,7 +263,7 @@ public class GameManager extends java.util.Observable{
         // Create new battle ship.
         return new BattleShip(direction, shipType,length , score, positionX, positionY, category);
     }
-    
+
     private int getShipLength(Board.Ship ship, List<ShipTypes.ShipType> shipTypes) {
         for (ShipTypes.ShipType type:shipTypes) {
             if(type.getId().equalsIgnoreCase(ship.getShipTypeId())){
@@ -300,9 +310,9 @@ public class GameManager extends java.util.Observable{
     }
 
     private void setLShapeShip(Player player, BattleShip playerShip){
-
         ShipDirection shipDir= playerShip.getDirection();
         Point rowPoint,colPoint, pivotPos = playerShip.getPosition();
+
         rowPoint = colPoint = pivotPos;
         boolean continueAddingShip = true;
         switch (shipDir){
@@ -323,8 +333,12 @@ public class GameManager extends java.util.Observable{
             default:
                 isErrorLoading = true;
                 continueAddingShip = false;
-                errorString += "L-Shape ship direction cannot be ROW or COLUMN!" + System.getProperty("line.separator");
+                errorString += "L-Shape ship direction cannot be ROW  or COLUMN!" + System.getProperty("line.separator");
                 break;
+        }
+        if(colPoint.getY() <0 || colPoint.getX() <0
+                ||rowPoint.getY() <0 || rowPoint.getX() <0 ){
+            pivotPos.setY(pivotPos.getY());
         }
         if(continueAddingShip){
             setRowShip(player,rowPoint,playerShip,playerShip.getLength());
@@ -353,7 +367,7 @@ public class GameManager extends java.util.Observable{
             // Set item to point to the battle ship. - x AND y ARE REPLACED IN ARRAY
             if (isShipOutOfBounds(x, y)) {
                 isErrorLoading = true;
-                errorString += "A Ship was placed outside of bounds (" + x + "," + y + "1) for " + player.getName() + System.getProperty("line.separator");
+                errorString += "A Ship was placed outside of bounds (" + x + "," + y + ") for " + player.getName() + System.getProperty("line.separator");
             } else {
                 setShipInBoard(x - 1, y - 1, playerShip, board, player);
             }

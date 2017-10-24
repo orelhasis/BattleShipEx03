@@ -30,4 +30,10 @@ public class Point {
         this.x = x;
         this.y = y;
     }
+
+    public void SwapXY(){
+        int t = this.x;
+        this.x = this.y;
+        this.y = t;
+    }
 }
