@@ -50,8 +50,8 @@ public class MultipleGamesManager {
         return res;
     }
 
-    public String AddNewGame(String Name,File gameFile){
-        BattleShipWebUI newGame = new BattleShipWebUI(lastID,Name);
+    public String AddNewGame(String Name,File gameFile, String Owner){
+        BattleShipWebUI newGame = new BattleShipWebUI(lastID,Name,Owner);
         Boolean addSuccessfully;
         String retString = null;
         newGame.SetLoadingXMLFile(gameFile);
@@ -68,6 +68,10 @@ public class MultipleGamesManager {
         return retString;
     }
 
+    public ArrayList<String> getAllPlayers() {
+        return allPlayers;
+    }
+
     public Boolean addPlayer(String newPlayerName){
         Boolean isPlayerExists = false;
         for (String str :allPlayers) {
@@ -81,4 +85,7 @@ public class MultipleGamesManager {
         return !isPlayerExists;
     }
 
+    public boolean DeleteGame(BattleShipWebUI game) {
+        return allGames.remove(game);
+    }
 }

@@ -29,7 +29,7 @@ public class UploadGame extends HttpServlet {
             final Part filePart = request.getPart("gameFile");
             File gameFile = stream2File(filePart.getInputStream(), request.getSession().getAttribute("PlayerName").toString());
             String gameName = request.getParameter("gameName").toString();
-            LoadingErrorString  = MultipleGamesManager.getInstance().AddNewGame(gameName ,gameFile);
+            LoadingErrorString  = MultipleGamesManager.getInstance().AddNewGame(gameName ,gameFile, request.getSession().getAttribute("PlayerName").toString());
         }
         else{
             LoadingErrorString  = "Please specify game name and select a file";

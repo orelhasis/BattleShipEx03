@@ -20,6 +20,21 @@
         <servlet-class>Servlets.UploadGame</servlet-class>
         <async-supported>true</async-supported>
     </servlet>
+    <servlet>
+        <servlet-name>PlayerAction</servlet-name>
+        <servlet-class>Servlets.PlayerAction</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet>
+        <servlet-name>RefreshAvailableGames</servlet-name>
+        <servlet-class>Servlets.RefreshAvailableGames</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteGame</servlet-name>
+        <servlet-class>Servlets.DeleteGame</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -39,5 +54,20 @@
     <servlet-mapping>
         <servlet-name>StartGame</servlet-name>
         <url-pattern>/StartGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PlayerAction</servlet-name>
+        <url-pattern>/Action</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RefreshAvailableGames</servlet-name>
+        <url-pattern>/RefreshList</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DeleteGame</servlet-name>
+        <url-pattern>/Delete</url-pattern>
     </servlet-mapping>
 </web-app>

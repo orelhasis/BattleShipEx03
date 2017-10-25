@@ -1,0 +1,14 @@
+#gamesTable,#gamesTable th, #gamesTable td  {
+    border-collapse: collapse;
+    border:1px solid #ccc;
+}
+#gamesTable th, #gamesTable th{
+    padding: 3px;
+}
+
+.center-div > div{
+    width:80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}

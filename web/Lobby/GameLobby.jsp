@@ -5,14 +5,7 @@
     <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../js/jquery.form.min.js"></script>
     <script type="text/javascript" src="../js/Lobby.js"></script>
-    <style>
-        .center-div > div{
-            width:80%;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/Lobby.css">
 </head>
 <body>
     <div class="center-div">
@@ -21,7 +14,7 @@
         <div>
             <div id="uploadGameDiv">
                 <h3>Upload a new Game</h3>
-                <form name="UploadGame" enctype="multipart/form-data" action="UploadGame" method="post">
+                <form name="UploadGame" enctype="multipart/form-data" action="UploadGame" method="post" onsubmit="return submitForm();">
                     <table>
                         <tr><th>Game Name</th><td><input type="text" name="gameName"/></td></tr>
                         <tr><th>File</th><td><input type="file" name="gameFile"/></td></tr>
@@ -29,6 +22,9 @@
                     </table>
                 </form>
                 <div id="Uploadoutput"></div>
+            </div>
+            <div id="OnlinePlayers">
+                <ul></ul>
             </div>
             <div id="availableGames">
                 <jsp:include page="availableGames.jsp"/>
