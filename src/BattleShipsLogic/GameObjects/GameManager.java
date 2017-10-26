@@ -479,14 +479,24 @@ public class GameManager extends java.util.Observable{
         }
     }
 
+    protected long gameStartedTime;
+
+    public void setGameStartedTime(long gameStartedTime) {
+        this.gameStartedTime = gameStartedTime;
+    }
+
+    public long getGameStartedTime() {
+        return gameStartedTime;
+    }
+
     public void updateStatistics(){
-        int moveTime = (int) ((System.nanoTime()/NANO_SECONDS_IN_SECOND) - currentTurnStartTimeInSeconds);
+        int moveTime = (int) (((System.nanoTime() - gameStartedTime) /NANO_SECONDS_IN_SECOND) - currentTurnStartTimeInSeconds);
         int numberOfTurns = currentPlayer.getStatistics().getNumberOfTurns();
         int averageTimeOfTurn = currentPlayer.getStatistics().getAverageTimeForTurn();
         int newAverage = ((numberOfTurns*averageTimeOfTurn)+moveTime)/(numberOfTurns+1);
         currentPlayer.getStatistics().setAverageTimeForTurn(newAverage);
         currentPlayer.getStatistics().setNumberOfTurns(numberOfTurns+1);
-        currentTurnStartTimeInSeconds = (int)(System.nanoTime()/NANO_SECONDS_IN_SECOND);
+        currentTurnStartTimeInSeconds = (int)((System.nanoTime() - gameStartedTime)/NANO_SECONDS_IN_SECOND);
     }
 
     public MoveResults makeMove(Point attackedPoint) {
@@ -589,11 +599,19 @@ public class GameManager extends java.util.Observable{
     }
 
     public String getRemainingShipsToDestroy() {
-
-         String res = "";
+        return getRemainingShipsToDestroyByPlayer(null);
+    }
+    public String getRemainingShipsToDestroyByPlayer(Player GetPlayer) {
+        String res = "";
         Player attackedPlayer = players[0];
         if (currentPlayer == players[0]) {
             attackedPlayer = players[1];
+        }
+        if(GetPlayer !=  null){
+            attackedPlayer = players[0];
+            if(GetPlayer == players[0]){
+                attackedPlayer = players[1];
+            }
         }
 
         SeaItem[][] attackedBoard = attackedPlayer.getBoard();
@@ -614,5 +632,10 @@ public class GameManager extends java.util.Observable{
             res+=((BattleShip)item).getShipCategory()+" ";
         }
         return res;
+    }
+
+    public void RestartGame() {
+        status = GameStatus.LOADED;
+        loadGame(gameSettings);
     }
 }

@@ -15,13 +15,12 @@
 <html>
 <head>
     <title>BattleShips</title>
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.form.min.js"></script>
+    <jsp:include page="/Global/Header.jsp"></jsp:include>
     <script type="text/javascript" src="../js/Game.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/Game.css">
 </head>
 <body>
-    <h1>You Are in game named <%=game.getGameName()%></h1>
+    <h1>You Are in game named <%=game.getGameName()%> (<%=game.getGameType()%>)</h1>
     <div class="center-div">
         <div id="myDetails" class="player-details">
             <div class="<%=myTurnClass%>">
@@ -37,10 +36,16 @@
             </div>
         </div>
     </div>
+    <div id="Statistics" style="display: none;">
+        <%=game.getStatistics(game.getPlayerByName(currentPlayer))%>
+    </div>
     <form name="actionForm">
         <input type="hidden" name="Action">
         <input type="hidden" name="x">
         <input type="hidden" name="y">
     </form>
+    <div id="surrenderDiv" style="display: none">
+        Are you sure you want to surrender?
+    </div>
 </body>
 </html>

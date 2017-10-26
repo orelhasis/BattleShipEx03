@@ -23,4 +23,7 @@
         <jsp:include page="OpponentInfo.jsp"></jsp:include>
     </div>
 </div>
+<div id="Statistics">
+    <%=game.getStatistics(game.getPlayerByName(currentPlayer))%>
+</div>
 <%}%>

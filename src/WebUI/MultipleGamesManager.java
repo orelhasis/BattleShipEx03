@@ -54,18 +54,33 @@ public class MultipleGamesManager {
         BattleShipWebUI newGame = new BattleShipWebUI(lastID,Name,Owner);
         Boolean addSuccessfully;
         String retString = null;
-        newGame.SetLoadingXMLFile(gameFile);
-        addSuccessfully = newGame.LoadGame();
-        //todo  - Synchronize this
-        if(addSuccessfully){
-            this.allGames.add(newGame);
-            lastID++;
+        addSuccessfully = isGameNameAvailable(Name);
+        if(!addSuccessfully){
+            retString = "A game with this name already exists!";
         }
         else{
-            retString = newGame.UIloadingError;
+            newGame.SetLoadingXMLFile(gameFile);
+            addSuccessfully = newGame.LoadGame();
+            if(addSuccessfully){
+                this.allGames.add(newGame);
+                lastID++;
+            }
+            else{
+                retString = newGame.UIloadingError;
+            }
         }
 
         return retString;
+    }
+
+    private Boolean isGameNameAvailable(String name) {
+        Boolean res = true;
+        for (BattleShipWebUI game :allGames) {
+            if(name.equalsIgnoreCase(game.getGameName())){
+                res = false;
+            }
+        }
+        return res;
     }
 
     public ArrayList<String> getAllPlayers() {
@@ -87,5 +102,10 @@ public class MultipleGamesManager {
 
     public boolean DeleteGame(BattleShipWebUI game) {
         return allGames.remove(game);
+    }
+
+    public void DeletePlayer(String playerName) {
+        //todo: synchronizr player deletion and loop
+        allPlayers.remove(playerName);
     }
 }

@@ -14,7 +14,7 @@ function playerMove(x,y){
     $('input[name=Action]').val('Attack');
     doPlayerAction();
 }
-function doPlayerAction(action,x,y){
+function doPlayerAction(){
     var formData  = new FormData($('form[name=actionForm]')[0]);
     justRefreshed = true;
     $.ajax({
@@ -55,10 +55,59 @@ function DroppedMine(event,x,y){
 }
 
 function updateDivs(replacementHtml){
+    if(replacementHtml == "GoBack"){
+        window.location = "../BattleShips"
+    }
+    else if(replacementHtml == "GameOver"){
+        window.location = "../GameOver"
+    }
     var player = $(replacementHtml).closest('#myDetails').html();
+    var Statistics = $(replacementHtml).closest('#Statistics').html();
     var opponent = $(replacementHtml).closest('#opponentDetails').html();
     var boards = $(replacementHtml).closest('#boards').html();
     $('#myDetails').html(player);
     $('#opponentDetails').html(opponent);
     $('#boards').html(boards);
+    $('#Statistics').html(Statistics);
+}
+
+function showStatistics(){
+    $("#Statistics").dialog({
+        title:"Statistics",
+        buttons: [
+            {
+                text: "OK",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
+}
+
+function startSurrender(surrenderType){
+    $("#surrenderDiv").html("Are you sure you want to " + surrenderType + "?")
+    $("#surrenderDiv").dialog({
+        title:surrenderType,
+        buttons: [
+            {
+                text: "Yes, " + surrenderType,
+                click: function() {
+                    $(this).dialog( "close" );
+                    surrender(surrenderType);
+                }
+            },
+            {
+                text: "Hell No!",
+                click: function() {
+                    $(this).dialog( "close" );
+                }
+            }
+        ]
+    });
+}
+
+function surrender(surrenderType){
+    $('input[name=Action]').val(surrenderType);
+    doPlayerAction(surrenderType,0,0)
 }

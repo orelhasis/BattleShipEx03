@@ -2,15 +2,16 @@
 <html>
 <head>
     <title>The Battle Ships Game</title>
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.form.min.js"></script>
+    <jsp:include page="/Global/Header.jsp"></jsp:include>
     <script type="text/javascript" src="../js/Lobby.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/Lobby.css">
 </head>
 <body>
+<h1>BattleShips Lobby</h1>
+<div>
+    <h2>Welcome <%=session.getAttribute("PlayerName")%></h2> <div id="LogOutDiv">(<a href="Logout">Logout</a>)</div>
+</div>
     <div class="center-div">
-        <h1>BattleShips Lobby</h1>
-        <h2>Welcome <%=session.getAttribute("PlayerName")%></h2>
         <div>
             <div id="uploadGameDiv">
                 <h3>Upload a new Game</h3>
@@ -21,9 +22,10 @@
                         <tr><td colspan="2"><input type="button" name="SubmitGame" value="Upload Game"></td></tr>
                     </table>
                 </form>
-                <div id="Uploadoutput"></div>
+                <div id="Uploadoutput" style="display: none;"></div>
             </div>
             <div id="OnlinePlayers">
+                <h3>Online Players</h3>
                 <ul></ul>
             </div>
             <div id="availableGames">

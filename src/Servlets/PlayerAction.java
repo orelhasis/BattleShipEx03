@@ -1,5 +1,6 @@
 package Servlets;
 
+    import BattleShipsLogic.Definitions.GameStatus;
     import BattleShipsLogic.Definitions.PlayerName;
     import BattleShipsLogic.GameObjects.Point;
     import WebUI.BattleShipWebUI;
@@ -25,11 +26,16 @@ public class PlayerAction extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         theRequest = request;
         theResponse = response;
+        Boolean refresh = true;
+        BattleShipWebUI theGame = (BattleShipWebUI) request.getSession().getAttribute("theGame");
         if(theRequest.getSession().getAttribute("inGamePlayer") == null){
             request.getRequestDispatcher("/BattleShips").forward(request, response);
-        }else {
+        }else if(theGame.getGameStatus() == GameStatus.OVER){
+            response.getWriter().write("GameOver");
+            response.getWriter().flush();
+        }
+        else {
             String ActionType = request.getParameter("Action");
-            BattleShipWebUI theGame = (BattleShipWebUI) request.getSession().getAttribute("theGame");
             switch (ActionType) {
                 case "Mine":
                     TryToSetAMine(theGame);
@@ -37,9 +43,25 @@ public class PlayerAction extends HttpServlet {
                 case "Attack":
                     AttackAPoint(theGame);
                     break;
+                case "Surrender":
+                    refresh = false;
+                    theGame.Surrender((PlayerName)request.getSession().getAttribute("inGamePlayer"));
+                    request.getSession().setAttribute("gameOverType", "Surrender");
+                    response.getWriter().write("GameOver");
+                    response.getWriter().flush();
+                    break;
+                case "Exit":
+                    refresh = false;
+                    theGame.UnregisterPlayer(request.getSession().getAttribute("PlayerName").toString());
+                    request.getSession().setAttribute("inGamePlayer",null);
+                    request.getSession().setAttribute("theGame",null);
+                    response.getWriter().write("GoBack");
+                    break;
             }
-            getMessageToPlayer(theGame);
-            request.getRequestDispatcher("/TheGame/GameRefresh.jsp").forward(request, response);
+            if(refresh){
+                getMessageToPlayer(theGame);
+                request.getRequestDispatcher("/TheGame/GameRefresh.jsp").forward(request, response);
+            }
         }
     }
 

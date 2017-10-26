@@ -27,6 +27,7 @@ function getPlayersList(){
     $.ajax({
         url:  'GetPlayers',
         type: 'POST',
+        dataType: 'json',
         enctype: 'multipart/form-data',
         processData: false,  // Important!
         contentType: false,
@@ -42,8 +43,8 @@ function updateList(newList){
 
 function updatePlayerList(PlayersJson){
     $('#OnlinePlayers ul').html("");
-    for(var player in PlayersJson){
-        $('#OnlinePlayers ul').append("<li>" + player.name + "</li>");
+    for(var i = 0 ; i < PlayersJson.players.length ; i++){
+        $('#OnlinePlayers ul').append("<li>" + PlayersJson.players[i].name + "</li>");
     }
 }
 
@@ -103,4 +104,15 @@ function checkFormData(){
 
 function setMessageToUser(msg){
     $('#Uploadoutput').html(msg);
+    $('#Uploadoutput').dialog({
+        title: "Game Upload status",
+        buttons: [
+            {
+                text: "OK",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
 }

@@ -19,4 +19,12 @@ if(PlayerMSG.length() > 0){
 <div class="error-div"></div>
 <div id="msgPlayer"><%=PlayerMSG%></div>
 <div id="actionResults"><%=Moveres%></div>
+<br>
+<%if(!game.isAvailable()){%>
+    <div><input type="button" value="Show Statistics" onclick="showStatistics();"></div>
+    <div><input type="button" value="Surrender" onclick="startSurrender('Surrender');"></div>
+<%}else{%>
+<div><input type="button" value="Exit Game" onclick="startSurrender('Exit');"></div>
+<%}%>
+
 <%}%>

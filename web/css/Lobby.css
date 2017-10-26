@@ -6,6 +6,10 @@
     padding: 3px;
 }
 
+#LogOutDiv, h2{
+    display: inline-block;
+}
+
 .center-div > div{
     width:80%;
     margin: auto;
