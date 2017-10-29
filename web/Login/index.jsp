@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>The Battle Ships Game</title>
-    <link rel="stylesheet" href="loginStyleSheet.css">
+    <jsp:include page="/Global/Header.jsp"></jsp:include>
 </head>
 <body>
     <h1>The Battle Ships Game</h1>

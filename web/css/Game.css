@@ -37,3 +37,7 @@ table img{
 .currentTurn{
     background-color: #00ff00;
 }
+
+#msgPlayer, #actionResults{
+    display: none;
+}

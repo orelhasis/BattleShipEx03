@@ -4,6 +4,10 @@
 }
 #gamesTable th, #gamesTable th{
     padding: 3px;
+    background-color: rgba(66,66,66,0.6);
+}
+#gamesTable td{
+    background-color: rgba(204,204,204,0.6);
 }
 
 #LogOutDiv, h2{

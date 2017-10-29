@@ -58,14 +58,14 @@ public class BattleShipWebUI extends BattleShipUI {
     }
 
     public char[][] GetOponnentBoard(PlayerName requestingPlayer){
-        if (requestingPlayer == PlayerName.PLAYER_1){
+        if (requestingPlayer == theGame.getPlayers()[0].getName()){
             return theGame.getPlayers()[1].getPlayerTrackingGrid();
         }
         return theGame.getPlayers()[0].getPlayerTrackingGrid();
     }
 
     public char[][] GetPlayerBoard(PlayerName requestingPlayer){
-        if (requestingPlayer == PlayerName.PLAYER_1){
+        if (requestingPlayer == theGame.getPlayers()[0].getName()){
             return theGame.getPlayers()[0].getPlayerPrimaryGrid();
         }
         return theGame.getPlayers()[1].getPlayerPrimaryGrid();
@@ -129,10 +129,10 @@ public class BattleShipWebUI extends BattleShipUI {
         if(player1Out && player2Out){
             theGame.RestartGame();
             player1Out = player2Out = false;
+            messageToPlayer1 = messageToPlayer2 = null;
             player1UserName = null;
             player2UserName = null;
             isAvailable = true;
-
         }
     }
 
@@ -174,6 +174,7 @@ public class BattleShipWebUI extends BattleShipUI {
     public void StartGame() {
         player1Out = false;
         player2Out = false;
+        messageToPlayer1 = messageToPlayer2 = "Let the battle begin!";
         isAvailable = false;
     }
 
@@ -219,20 +220,19 @@ public class BattleShipWebUI extends BattleShipUI {
     }
     protected void printStatisticsByUser(Player playerRequesting) {
         String nl = "<br>";
-        statistics = "Total number of turns: " + (theGame.getPlayers()[0].getStatistics().getNumberOfTurns() + theGame.getPlayers()[1].getStatistics().getNumberOfTurns()) + nl;
-
+        statistics = "<b>Total number of turns:</b> " + (theGame.getPlayers()[0].getStatistics().getNumberOfTurns() + theGame.getPlayers()[1].getStatistics().getNumberOfTurns()) + nl;
         if (theGame.getStatus() == GameStatus.OVER) {
-            statistics += "Game total time: " + calcTime((theGame.getEndTimeInSeconds() - theGame.getStartTime())) + nl;
+            statistics += "<b>Game total time:</b> " + calcTime((theGame.getEndTimeInSeconds() - theGame.getStartTime())) + nl;
         }
         else {
-            statistics += "Time elapsed: " + calcTime((int) (((System.nanoTime() - theGame.getGameStartedTime())/NANO_SECONDS_IN_SECOND) - theGame.getStartTime())) + nl;
+            statistics += "<b>Time elapsed:</b> " + calcTime((int) (((System.nanoTime() - theGame.getGameStartedTime())/NANO_SECONDS_IN_SECOND) - theGame.getStartTime())) + nl;
         }
-        statistics += "Number of hits: " + player1UserName + " - " + theGame.getPlayers()[0].getStatistics().getNumberOfHits() + ", " + player2UserName + " - " + theGame.getPlayers()[1].getStatistics().getNumberOfHits() + "." + nl;
-        statistics += "Number of misses: " + player1UserName + " - " + theGame.getPlayers()[0].getStatistics().getNumberOfMissing() + ", " + player2UserName + " - " + theGame.getPlayers()[1].getStatistics().getNumberOfMissing() + "." + nl;
-        statistics += "Average time for attack: " + player1UserName + " - " + calcTime(theGame.getPlayers()[0].getStatistics().getAverageTimeForTurn()) + ", " + player2UserName + " - " + calcTime(theGame.getPlayers()[1].getStatistics().getAverageTimeForTurn()) + "." + nl;
+        statistics += "<b>Number of hits:</b><br>   - " + player1UserName + " : " + theGame.getPlayers()[0].getStatistics().getNumberOfHits() + "<br>   - " + player2UserName + " - " + theGame.getPlayers()[1].getStatistics().getNumberOfHits() + nl;
+        statistics += "<b>Number of misses:</b><br>   - " + player1UserName + " - " + theGame.getPlayers()[0].getStatistics().getNumberOfMissing() + "<br>   - " + player2UserName + " - " + theGame.getPlayers()[1].getStatistics().getNumberOfMissing() + "." + nl;
+        statistics += "<b>Average time for attack:</b><br>   - " + player1UserName + " - " + calcTime(theGame.getPlayers()[0].getStatistics().getAverageTimeForTurn()) + "<br>   - " + player2UserName + " - " + calcTime(theGame.getPlayers()[1].getStatistics().getAverageTimeForTurn()) + "." + nl;
 
         if(theGame.getStatus()!=GameStatus.OVER && playerRequesting != null) {
-            statistics += "Remaining ships to destroy: " + theGame.getRemainingShipsToDestroyByPlayer(playerRequesting) + "." + nl;
+            statistics += "<b>Remaining ships to destroy:</b>" + theGame.getRemainingShipsToDestroyByPlayer(playerRequesting) + "." + nl;
         }
     }
 

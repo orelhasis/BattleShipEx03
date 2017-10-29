@@ -627,9 +627,9 @@ public class GameManager extends java.util.Observable{
             }
         }
 
-        res+=attackedItemsList.size()+" - ";
+        res+="<br>" + attackedItemsList.size() + " Ships:";
         for (SeaItem item: attackedItemsList){
-            res+=((BattleShip)item).getShipCategory()+" ";
+            res+="<br>  - " + ((BattleShip)item).getShipCategory();
         }
         return res;
     }

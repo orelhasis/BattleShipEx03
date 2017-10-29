@@ -1,0 +1,50 @@
+body{
+    background: url("../images/background.jpg") repeat;
+}
+*{
+    font-family: Arial;
+}
+
+h1{
+    font-family: "Comic Sans MS";
+    color: blueviolet;
+}
+
+input[type=button],input[type=submit], button:not(.ui-button){
+    border: none;
+    min-width: 6.3em;
+    padding: 10px 5px;
+    cursor: pointer;
+    background-color: #454545;
+    color: white;
+}
+
+input[type=button]:hover,input[type=submit]:hover, button:hover {
+
+    background-color: #666666;
+    color: Black;
+
+}
+
+label{
+    font-weight: bold;
+}
+
+a {
+    font-weight: bold;
+    color: crimson;
+}
+
+h3 {
+    color: brown;
+}
+ul{
+  list-style: square;
+    background-color: rgba(43,43,43,0.5);
+}
+
+li{
+    color:whitesmoke;
+    font-weight: bold;
+    margin-bottom: 5px ;
+}

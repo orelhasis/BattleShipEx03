@@ -19,7 +19,7 @@ public class Logout extends HttpServlet {
     private void unregisterAndRedirect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if(session != null){
-            if(session.getAttribute("inGamePlayer") == null){
+            if(session.getAttribute("inGamePlayer") == null && session.getAttribute("PlayerName")!= null){
                 MultipleGamesManager.getInstance().DeletePlayer(session.getAttribute("PlayerName").toString());
                 session.invalidate();
             }

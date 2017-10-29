@@ -65,15 +65,45 @@ function updateDivs(replacementHtml){
     var Statistics = $(replacementHtml).closest('#Statistics').html();
     var opponent = $(replacementHtml).closest('#opponentDetails').html();
     var boards = $(replacementHtml).closest('#boards').html();
+    var msgToPlayer = $(replacementHtml).find('#msgPlayer').html();
+    var actionResults = $(replacementHtml).find('#actionResults').html();
+    createMsgsDialogs(msgToPlayer, actionResults);
     $('#myDetails').html(player);
     $('#opponentDetails').html(opponent);
     $('#boards').html(boards);
     $('#Statistics').html(Statistics);
 }
 
+function createMsgsDialogs(msgToPlayer, actionResults){
+    if(msgToPlayer.length > 0) {
+        startDialogWithText(msgToPlayer,"Game Update");
+    }
+    if(actionResults.length > 0) {
+        startDialogWithText(actionResults,"Your Move results");
+    }
+}
+
+function startDialogWithText(text, title){
+    if(text.length > 0){
+        $("<div>" + text + "</div>").dialog({
+            title:title,
+            modal: true,
+            buttons: [
+                {
+                    text: "OK",
+                    click: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            ]
+        });
+    }
+}
+
 function showStatistics(){
     $("#Statistics").dialog({
         title:"Statistics",
+        modal: true,
         buttons: [
             {
                 text: "OK",
