@@ -16,7 +16,7 @@ if(PlayerMSG.length() > 0){
     <div class="PlayerMines">
         Mines: <%=game.GetPlayerMines(currentPlayer)%>
         <input type="hidden" name ="playerMines" value="<%=game.GetPlayerMines(currentPlayer)%>"/>
-        <img src="../images/M.png" ondragstart="DragMine(event);" alt="Drag this to YOUR board to set a mine">
+        <img src="images/M.png" ondragstart="DragMine(event);" alt="Drag this to YOUR board to set a mine">
     </div>
 <%}%>
 <div class="error-div"></div>
@@ -31,6 +31,6 @@ if(PlayerMSG.length() > 0){
 <div id="actionResults" ><%=Moveres%></div>
 <%if(myTurn){%>
     <br>
-    <img src="../images/turnarrow.png">
+    <img src="images/turnarrow.png">
 <%}%>
 <%}%>

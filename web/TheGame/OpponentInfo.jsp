@@ -14,7 +14,7 @@ Boolean myTurn = game.getCurrentPlayer() == currentPlayer && !game.isAvailable()
         <%}%>
         <%if(!myTurn){%>
             <br>
-            <img src="../images/turnarrow.png">
+            <img src="images/turnarrow.png">
         <%}%>
     <%}
 }%>

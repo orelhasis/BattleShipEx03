@@ -56,10 +56,10 @@ function DroppedMine(event,x,y){
 
 function updateDivs(replacementHtml){
     if(replacementHtml == "GoBack"){
-        window.location = "../BattleShips"
+        window.location = "BattleShips"
     }
     else if(replacementHtml == "GameOver"){
-        window.location = "../GameOver"
+        window.location = "GameOver"
     }
     var player = $(replacementHtml).closest('#myDetails').html();
     var Statistics = $(replacementHtml).closest('#Statistics').html();

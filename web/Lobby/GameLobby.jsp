@@ -3,8 +3,8 @@
 <head>
     <title>The Battle Ships Game</title>
     <jsp:include page="/Global/Header.jsp"></jsp:include>
-    <script type="text/javascript" src="../js/Lobby.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/Lobby.css">
+    <script type="text/javascript" src="js/Lobby.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/Lobby.css">
 </head>
 <body>
 <h1>BattleShips Lobby</h1>

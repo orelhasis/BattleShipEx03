@@ -8,8 +8,8 @@
 <head>
     <title>BattleShips</title>
     <jsp:include page="/Global/Header.jsp"></jsp:include>
-    <script type="text/javascript" src="../js/Game.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/Game.css">
+    <script type="text/javascript" src="js/Game.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/Game.css">
 </head>
 <body>
     <h1>You Are in game named <%=game.getGameName()%> (<%=game.getGameType()%>)</h1>

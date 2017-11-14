@@ -8,14 +8,14 @@ String playerName = request.getSession().getAttribute("PlayerName").toString();%
 <%if(allGames.size() != 0){%>
     <table id="gamesTable">
         <thead>
-            <tr><th><img src="../images/del.jpg" style="width:20px"></th><th>Game Name</th><th>Owner</th><th>Board Size</th><th>Game Type</th><th>Game Status</th></tr>
+            <tr><th><img src="images/del.jpg" style="width:20px"></th><th>Game Name</th><th>Owner</th><th>Board Size</th><th>Game Type</th><th>Game Status</th></tr>
         </thead>
         <%for (BattleShipWebUI game: allGames) {
             Boolean isAvailable = game.isAvailable();%>
                 <tr <%=isAvailable?"" : "class='inGame'"%>>
                     <td>
                         <%if(playerName == game.getGameOwner()){%>
-                            <img src="../images/del.jpg" style="width:20px" onclick="javascript:delGame(<%=game.getGameID()%>)"/>
+                            <img src="images/del.jpg" style="width:20px" onclick="javascript:delGame(<%=game.getGameID()%>)"/>
                         <%}%>
                     </td>
                     <td>

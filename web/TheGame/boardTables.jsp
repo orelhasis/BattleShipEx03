@@ -11,7 +11,7 @@
             for(int i=1;i<=boardSize;i++){%>
         <tr>
             <%for(int j=1;j<=boardSize;j++){%>
-            <td><img src="../images/<%=board[i][j]%>.png" onclick="javascript:playerMove(<%=i%>,<%=j%>)"/></td>
+            <td><img src="images/<%=board[i][j]%>.png" onclick="javascript:playerMove(<%=i%>,<%=j%>)"/></td>
             <%}%>
         </tr>
         <%}%>
@@ -25,7 +25,7 @@
             for(int i=1;i<=boardSize;i++){%>
         <tr>
             <%for(int j=1;j<=boardSize;j++){%>
-            <td><img src="../images/<%=board[i][j]%>.png" ondragover="allowDrop(event);" ondrop="DroppedMine(event,<%=i%>,<%=j%>)"/></td>
+            <td><img src="images/<%=board[i][j]%>.png" ondragover="allowDrop(event);" ondrop="DroppedMine(event,<%=i%>,<%=j%>)"/></td>
             <%}%>
         </tr>
         <%}%>
