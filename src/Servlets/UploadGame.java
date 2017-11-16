@@ -14,6 +14,7 @@ import java.io.*;
         maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 public class UploadGame extends HttpServlet {
     private static final String SUFFIX = ".xml";
+    private static final String TEMP_UPLOAD = ".tempUpload_";
 
     private void checkAndRedirectBySession(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
             HttpSession session = request.getSession();
@@ -47,7 +48,7 @@ public class UploadGame extends HttpServlet {
     }
 
     private File stream2File(InputStream in, String userName) throws IOException{
-        final File tmpFile = File.createTempFile(userName,SUFFIX);
+        final File tmpFile = File.createTempFile(TEMP_UPLOAD + userName,SUFFIX);
         byte[] buffer = new byte[in.available()];
         in.read(buffer);
         OutputStream out = new FileOutputStream(tmpFile);

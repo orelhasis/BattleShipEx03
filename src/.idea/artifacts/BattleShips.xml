@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="BattleShips">
+    <output-path>$PROJECT_DIR$/out/artifacts/BattleShips</output-path>
+    <root id="root" />
+  </artifact>
+</component>
