@@ -222,7 +222,7 @@ public class BattleShipWebUI extends BattleShipUI {
         String nl = "<br>";
         statistics = "<b>Total number of turns:</b> " + (theGame.getPlayers()[0].getStatistics().getNumberOfTurns() + theGame.getPlayers()[1].getStatistics().getNumberOfTurns()) + nl;
         if (theGame.getStatus() == GameStatus.OVER) {
-            statistics += "<b>Game total time:</b> " + calcTime((theGame.getEndTimeInSeconds() - theGame.getStartTime())) + nl;
+            statistics += "<b>Game total time:</b> " + calcTime((int)((theGame.getEndTimeInSeconds() - theGame.getGameStartedTime())/NANO_SECONDS_IN_SECOND)) + nl;
         }
         else {
             statistics += "<b>Time elapsed:</b> " + calcTime((int) (((System.nanoTime() - theGame.getGameStartedTime())/NANO_SECONDS_IN_SECOND) - theGame.getStartTime())) + nl;
@@ -384,6 +384,7 @@ public class BattleShipWebUI extends BattleShipUI {
             WinnerPlayer = theGame.getPlayers()[1];
             gameOverString = "<b>" + player1UserName + "</b> Surrendered, that makes <b>" +player2UserName + "</b> the winner!!!";
         }
+        theGame.setEndTimeInSeconds(System.nanoTime());
         theGame.setWinnerPlayer(WinnerPlayer);
     }
 

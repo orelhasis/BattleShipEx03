@@ -20,7 +20,7 @@ public class GameManager extends java.util.Observable{
     private Player winnerPlayer;
     private int boardSize;
     private int startTimeInSeconds;
-    private int endTimeInSeconds;
+    private long endTimeInSeconds;
     private int currentTurnStartTimeInSeconds;
     private boolean isErrorLoading;
     private String errorString;
@@ -98,11 +98,11 @@ public class GameManager extends java.util.Observable{
         this.startTimeInSeconds = startTimeInSeconds;
     }
 
-    public int getEndTimeInSeconds() {
+    public long getEndTimeInSeconds() {
         return endTimeInSeconds;
     }
 
-    public void setEndTimeInSeconds(int endTimeInSeconds) {
+    public void setEndTimeInSeconds(long endTimeInSeconds) {
         this.endTimeInSeconds = endTimeInSeconds;
     }
 
@@ -472,6 +472,7 @@ public class GameManager extends java.util.Observable{
             if (!getCurrentPlayer().AddMine(location)){
                 return MineMoveResult.NoMinesLeft;
             }
+            updateStatistics();
             return MineMoveResult.Success;
         }
         else{
@@ -534,6 +535,7 @@ public class GameManager extends java.util.Observable{
             if(attackedPlayer.IsPlayerDestroyed()) {
                 winnerPlayer = currentPlayer;
                 status = GameStatus.OVER;
+                setEndTimeInSeconds(System.nanoTime());
             }
         }
         else if (attackedItem instanceof Mine)
